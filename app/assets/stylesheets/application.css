@@ -1,36 +1,36 @@
 .bg_primary-color {
     background-color: #FFFFFF;
-  }
-  .primary-color {
+}
+.primary-color {
     background-color: #FFFFFF;
-  }
-  .bg_secondary-color {
+}
+.bg_secondary-color {
     background-color: #293241;
-  }
-  .secondary-color {
+}
+.secondary-color {
     color: #293241;
-  }
-  .custom-button.btn {
+}
+.custom-button.btn {
     background-color: #293241;
     color: #FFF;
     border: none;
-  }
-  .custom-button.btn:hover {
+}
+.custom-button.btn:hover {
     color: #FFF !important;
     border: none;
-  }
-  .hero {
-    width: 100vw;
-    height: 50vh;
-  }
-  .hero img {
-    object-fit: cover;
-    object-position: top;
-    height: 100%;
-    width: 100%;
-  }
-  .overlay {
+}
+.overlay {
     height: 100%;
     width: 100%;
     opacity: 0.4;
-  }
+}
+.task_left {
+    display: inline-block;
+}
+.task_spacer {
+  display: inline-block;
+  width: 20px;
+}
+.task_right {
+    float: right;
+}

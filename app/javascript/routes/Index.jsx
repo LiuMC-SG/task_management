@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../components/Home";
-import Tasks from "../components/Tasks";
-import Task from "../components/Task";
-import NewTask from "../components/NewTask";
-import EditTask from "../components/EditTask";
+import Tasks from "../components/Tasks/Tasks";
+import Task from "../components/Tasks/Task";
+import NewTask from "../components/Tasks/NewTask";
+import EditTask from "../components/Tasks/EditTask";
 
 export default (
   <Router>
