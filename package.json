@@ -24,11 +24,6 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "prettier": "2.5.1",
     "webpack-dev-server": "^3"
-  },
-  "scripts": {
-    "format": "prettier --check \"app/**/*.{js,ts,jsx,tsx,scss}\"",
-    "format:fix": "prettier --write \"app/**/*.{js,ts,jsx,tsx,scss}\""
   }
 }
