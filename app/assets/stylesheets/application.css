@@ -1,36 +1,29 @@
 .bg_primary-color {
-    background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 .primary-color {
-    background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 .bg_secondary-color {
-    background-color: #293241;
+  background-color: #293241;
 }
 .secondary-color {
-    color: #293241;
+  color: #293241;
 }
 .custom-button.btn {
-    background-color: #293241;
-    color: #FFF;
-    border: none;
+  background-color: #293241;
+  color: #fff;
+  border: none;
 }
 .custom-button.btn:hover {
-    color: #FFF !important;
-    border: none;
+  color: #fff !important;
+  border: none;
 }
 .overlay {
-    height: 100%;
-    width: 100%;
-    opacity: 0.4;
+  height: 100%;
+  width: 100%;
+  opacity: 0.4;
 }
-.task_left {
-    display: inline-block;
-}
-.task_spacer {
-  display: inline-block;
-  width: 20px;
-}
-.task_right {
-    float: right;
+.sidebar {
+  overflow: auto
 }

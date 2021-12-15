@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import TaskForm from "./TaskForm";
+import TaskForm from "../TaskComponents/TaskForm";
 
 const NewTask = () => {
     const [name, setName] = useState("");

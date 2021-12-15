@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
-import TaskForm from "./TaskForm";
+import TaskForm from "../TaskComponents/TaskForm";
 
 const EditTask = () => {
     const [name, setName] = useState("");
