@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import moment from 'moment';
 import TaskCheckbox from '../TaskComponents/TaskCheckbox';
 import TaskSidebar from '../TaskComponents/TaskSidebar';
 
@@ -9,8 +10,14 @@ const Tasks = () => {
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState('');
     const navigate = useNavigate();
+    const { day } = useParams();
+    const [timing, setTiming] = useState(day);
 
-    const onClick = (d) => {
+    const onTimeClick = (time) => {
+        setTiming(time);
+    };
+
+    const onCategoryClick = (d) => {
         setCategory(d);
     };
 
@@ -32,6 +39,7 @@ const Tasks = () => {
                                 return task.category.toLowerCase();
                             })
                             .filter((x) => x)
+                            .filter((x, i, a) => a.indexOf(x) == i)
                             .sort(),
                     ),
                 );
@@ -41,9 +49,6 @@ const Tasks = () => {
 
     return (
         <>
-            <Link to="/" className="btn btn-link">
-                Home
-            </Link>
             <section className="jumbotron jumbotron-fluid text-center">
                 <div className="container py-5">
                     <h1 className="display-4">Tasks</h1>
@@ -53,36 +58,62 @@ const Tasks = () => {
                 <div class="row">
                     <div className="col-sm-3">
                         <main className="container">
-                            <input
-                                type="text"
-                                placeholder="Search Field"
-                                onChange={(e) => {
-                                    setSearch(e.target.value);
-                                }}
-                                className="w-100"
+                            <TaskSidebar
+                                categories={categories}
+                                onCategoryClick={onCategoryClick}
+                                onTimeClick={onTimeClick}
                             />
-                            <p className="mt-3 mb-1">Categories</p>
-                            <TaskSidebar categories={categories} onClick={onClick} />
                         </main>
                     </div>
                     <div className="col-sm-9">
                         <main className="container">
-                            <div className="text-right mb-3">
-                                <Link to="/task/new" className="btn custom-button">
-                                    Create New Task
-                                </Link>
+                            <div className="row">
+                                <input
+                                    type="text"
+                                    placeholder="Search Field"
+                                    onChange={(e) => {
+                                        setSearch(e.target.value);
+                                    }}
+                                    className="col-sm-9"
+                                />
+                                <div className="col-sm-3">
+                                    <Link to="/task/new" className="btn custom-button">
+                                        Create New Task
+                                    </Link>
+                                </div>
                             </div>
                             <div className="row">
                                 {tasks.length > 0 ? (
                                     tasks
                                         .filter((task) => {
+                                            if (category == 'all' || task.category.toLowerCase().includes(category)) {
+                                                return task;
+                                            }
+                                        })
+                                        .filter((task) => {
                                             if (
-                                                (category == 'all' || task.category.toLowerCase().includes(category)) &&
-                                                (search == '' ||
-                                                    task.name.toLowerCase().includes(search.toLowerCase()) ||
-                                                    task.task.toLowerCase().includes(search.toLowerCase()))
+                                                search == '' ||
+                                                task.name.toLowerCase().includes(search.toLowerCase()) ||
+                                                task.task.toLowerCase().includes(search.toLowerCase())
                                             ) {
                                                 return task;
+                                            }
+                                        })
+                                        .filter((task) => {
+                                            if (timing === 'all_time') {
+                                                return task;
+                                            } else {
+                                                if (
+                                                    timing === 'today' &&
+                                                    moment(task.due_date).utc().isSame(moment(), 'day')
+                                                ) {
+                                                    return task;
+                                                } else if (
+                                                    timing === 'upcoming' &&
+                                                    moment(task.due_date).utc().isAfter(moment(), 'day')
+                                                ) {
+                                                    return task;
+                                                }
                                             }
                                         })
                                         .map((task, index) => (

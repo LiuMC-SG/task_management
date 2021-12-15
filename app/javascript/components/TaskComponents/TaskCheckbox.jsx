@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const TaskCheckbox = (props) => {
     const [checked, setChecked] = useState(props.completed);
@@ -45,7 +46,7 @@ const TaskCheckbox = (props) => {
                         <p>{props.task}</p>
                     </div>
                     <div>
-                        <p>To be completed on: {props.due_date}</p>
+                        <p>To be completed on: {moment(props.due_date).local().format('YYYY-MM-DD HH:mm')}</p>
                     </div>
                 </div>
                 <div className="col-sm-1">

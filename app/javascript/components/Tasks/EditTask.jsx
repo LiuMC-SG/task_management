@@ -6,7 +6,7 @@ import TaskForm from '../TaskComponents/TaskForm';
 const EditTask = () => {
     const [name, setName] = useState('');
     const [task, setTask] = useState('');
-    const [date, setDate] = useState('');
+    const [due_date, setDueDate] = useState('');
     const [category, setCategory] = useState('');
     const navigate = useNavigate();
     const { id } = useParams();
@@ -14,7 +14,7 @@ const EditTask = () => {
     const setData = (data) => {
         setName(data.name);
         setTask(data.task);
-        setDate(data.date);
+        setDueDate(data.due_date);
         setCategory(data.category);
     };
 
@@ -25,7 +25,7 @@ const EditTask = () => {
         const body = {
             name: name,
             task: task.replace(/\n/g, '<br> <br>'),
-            due_date: date,
+            due_date: moment(due_date).utc().format('YYYY-MM-DD HH:mm'),
             category: category,
         };
 
@@ -59,7 +59,7 @@ const EditTask = () => {
                 throw new Error('Network error.');
             })
             .then((response) => setData(response))
-            .catch(() => navigate('/tasks'));
+            .catch(() => navigate('/tasks/all_time'));
     }, []);
 
     return (
@@ -70,8 +70,8 @@ const EditTask = () => {
             setName={setName}
             task={task}
             setTask={setTask}
-            date={moment(date).format('YYYY-MM-DDTHH:mm')}
-            setDate={setDate}
+            due_date={moment(due_date).local().format('YYYY-MM-DDTHH:mm')}
+            setDueDate={setDueDate}
             category={category}
             setCategory={setCategory}
             cancel={`/task/${id}`}

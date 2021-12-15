@@ -51,7 +51,7 @@ const NewTask = () => {
             setDate={setDate}
             category={category}
             setCategory={setCategory}
-            cancel={'/tasks'}
+            cancel={'/tasks/all_time'}
         />
     );
 };

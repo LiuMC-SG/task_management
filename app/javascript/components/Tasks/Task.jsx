@@ -61,7 +61,7 @@ const Task = () => {
                     <div className="col-sm-12 col-lg-3">
                         <ul className="list-group">
                             <h5 className="mb-2">Due Date (24 Hrs)</h5>
-                            {moment(task.due_date).utc().format('DD-MMM-YYYY HH:mm')}
+                            {moment(task.due_date).local().format('DD-MMM-YYYY HH:mm')}
                             <h5></h5>
                             <h5 className="mb-2">Category</h5>
                             {task.category === '' ? 'None' : addHtmlEntities(task.category)}
@@ -95,7 +95,7 @@ const Task = () => {
                         </button>
                     </div>
                 </div>
-                <Link to="/tasks" className="btn btn-link">
+                <Link to="/tasks/all_time" className="btn btn-link">
                     Back to Tasks
                 </Link>
             </div>

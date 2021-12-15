@@ -39,10 +39,10 @@ const TaskForm = (param) => {
                             <input
                                 name="date"
                                 type="datetime-local"
-                                value={param.date}
+                                value={param.due_date}
                                 className="form-control"
                                 required
-                                onChange={(e) => param.setDate(e.target.value)}
+                                onChange={(e) => param.setDueDate(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
