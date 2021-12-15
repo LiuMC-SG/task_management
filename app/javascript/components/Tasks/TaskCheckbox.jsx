@@ -5,9 +5,8 @@ const TaskCheckbox = (props)  => {
     const [checked, setChecked] = useState(props.completed); 
     
     const onChange = (e) => { 
-        setChecked(e.target.checked);
-
-        e.preventDefault();
+        console.log(checked);
+        setChecked(!checked);
         const url = `/api/v1/tasks/update/${props.id}`;
 
         const body = {
@@ -15,7 +14,7 @@ const TaskCheckbox = (props)  => {
             task: props.task.replace(/\n/g, "<br> <br>"),
             due_date: props.due_date,
             category: props.category,
-            completed: checked
+            completed: !checked ? '1' : '0'
         };
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -27,12 +26,7 @@ const TaskCheckbox = (props)  => {
                 },
                 body: JSON.stringify(body)
             })
-                .then(response => {
-                    if (!response.ok) {
-                        return "Task Updated";
-                    }
-                    throw new Error("Network error.");
-                })
+                .then(response => response.json())
                 .then(response => console.log(response))
                 .catch(error => console.log(error.message));
     };
@@ -40,7 +34,7 @@ const TaskCheckbox = (props)  => {
     return (
         <>
             <div className="task_left align-items-center justify-content-center" >
-                <input type="checkbox" onChange={(e) => onChange(e)} defaultChecked={checked} />
+                <input type="checkbox" onClick={(e) => onChange(e)} defaultChecked={checked} />
             </div>
             <div className="task_spacer" />
             <div className="task_left">
