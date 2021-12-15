@@ -60,6 +60,7 @@ const Tasks = () => {
                         <main className="container">
                             <TaskSidebar
                                 categories={categories}
+                                timing={timing}
                                 onCategoryClick={onCategoryClick}
                                 onTimeClick={onTimeClick}
                             />

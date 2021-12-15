@@ -4,7 +4,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 
 const TaskSidebar = (props) => {
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
-    const [selectedTimeIndex, setSelectedTimeIndex] = useState('all_time');
+    const [selectedTimeIndex, setSelectedTimeIndex] = useState(props.timing);
 
     const onTimeClick = (time, index) => {
         props.onTimeClick(time);
