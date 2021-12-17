@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { List, ListItem, ListItemText, ListItemIcon, Collapse } from '@material-ui/core';
-import { Home, Today, DateRange, CalendarToday, Link, Class, EventBusy, EventAvailable, ExpandLess, ExpandMore } from '@material-ui/icons';
+import {
+    Home,
+    Today,
+    DateRange,
+    CalendarToday,
+    Link,
+    Class,
+    EventBusy,
+    EventAvailable,
+    ExpandLess,
+    ExpandMore,
+} from '@material-ui/icons';
 
 const TaskSidebar = (props) => {
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
@@ -39,12 +50,7 @@ const TaskSidebar = (props) => {
                 </ListItem>
                 <Collapse in={stateopen} timeout="auto" unmountOnExit>
                     <List disablePadding dense>
-                        <ListItem
-                            button
-                            key="home"
-                            component={ReactLink}
-                            to="/"
-                            className="ps-sm-5">
+                        <ListItem button key="home" component={ReactLink} to="/" className="ps-sm-5">
                             <ListItemIcon>
                                 <Home />
                             </ListItemIcon>

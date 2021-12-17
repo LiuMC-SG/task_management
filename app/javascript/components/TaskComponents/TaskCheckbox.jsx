@@ -61,8 +61,14 @@ const TaskCheckbox = (props) => {
                             >
                                 {props.task.task}
                             </Typography>
-                            <Typography variant="body2" component="p" className={'task_secondary' + (checked ? ' completed' : '')}>
-                                <Typography component="span" className="pb-1">{'To be completed on: '}</Typography>
+                            <Typography
+                                variant="body2"
+                                component="p"
+                                className={'task_secondary' + (checked ? ' completed' : '')}
+                            >
+                                <Typography component="span" className="pb-1">
+                                    {'To be completed on: '}
+                                </Typography>
                                 <Typography
                                     component="span"
                                     className={

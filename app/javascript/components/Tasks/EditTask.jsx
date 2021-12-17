@@ -22,7 +22,7 @@ const EditTask = () => {
 
     const setCompletion = () => {
         setCompleted(!completed);
-    }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -33,7 +33,7 @@ const EditTask = () => {
             task: task.replace(/\n/g, '<br> <br>'),
             due_date: moment(due_date).utc().format('YYYY-MM-DD HH:mm'),
             category: category,
-            completed: completed
+            completed: completed,
         };
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
