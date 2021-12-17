@@ -53,33 +53,36 @@ const Task = () => {
 
     return (
         <div className="">
-            <div className="position-relative d-flex align-items-center justify-content-center">
-                <h1 className="display-4 position-relative">{addHtmlEntities(task.name)}</h1>
+            <div className="container py-5">
+                <h1 className="text-wrap text-break text-center">{addHtmlEntities(task.name)}</h1>
             </div>
             <div className="container py-5">
                 <div className="row">
-                    <div className="col-sm-12 col-lg-3">
+                    <div className="col-lg-3">
                         <ul className="list-group">
                             <h5 className="mb-2">Due Date (24 Hrs)</h5>
-                            {moment(task.due_date).local().format('DD-MMM-YYYY HH:mm')}
-                            <h5></h5>
+                            <div className="mb-3">{moment(task.due_date).local().format('DD-MMM-YYYY HH:mm')}</div>
                             <h5 className="mb-2">Category</h5>
-                            {task.category === '' ? 'None' : addHtmlEntities(task.category)}
-                            <h5></h5>
-                            <h5 className="mb-2">Completion Status</h5>
-                            {task.completed ? 'Completed' : 'Not Completed'}
-                            <h5></h5>
+                            <div className="text-wrap text-break mb-3">
+                                {task.category === '' ? 'None' : addHtmlEntities(task.category)}
+                            </div>
+                            <h5 className="mb-2 mb-3">Completion Status</h5>
+                            <div className="mb-3">{task.completed ? 'Completed' : 'Not Completed'}</div>
+                            <Link to="/tasks/all_time" className="btn custom-button mt-3">
+                                Back to Tasks
+                            </Link>
                         </ul>
                     </div>
-                    <div className="col-sm-12 col-lg-7">
+                    <div className="col-lg-7">
                         <h5 className="mb-2">Description</h5>
                         <div
                             dangerouslySetInnerHTML={{
                                 __html: `${addHtmlEntities(task.task)}`,
                             }}
+                            className="text-wrap text-break"
                         />
                     </div>
-                    <div className="col-sm-12 col-lg-2">
+                    <div className="col-lg-2">
                         <button type="button" className="btn btn-danger" onClick={editTask}>
                             Edit Task
                         </button>
@@ -95,9 +98,6 @@ const Task = () => {
                         </button>
                     </div>
                 </div>
-                <Link to="/tasks/all_time" className="btn btn-link">
-                    Back to Tasks
-                </Link>
             </div>
         </div>
     );

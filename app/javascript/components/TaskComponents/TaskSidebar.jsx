@@ -141,7 +141,7 @@ const TaskSidebar = (props) => {
                                 selected={index === selectedCategoryIndex}
                                 className="ps-sm-5"
                             >
-                                <ListItemText>{category.charAt(0).toUpperCase() + category.slice(1)}</ListItemText>
+                                <ListItemText className="text-capitalize">{category}</ListItemText>
                             </ListItem>
                         ))}
                     </List>

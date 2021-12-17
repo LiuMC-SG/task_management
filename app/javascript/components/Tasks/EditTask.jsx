@@ -8,6 +8,7 @@ const EditTask = () => {
     const [task, setTask] = useState('');
     const [due_date, setDueDate] = useState('');
     const [category, setCategory] = useState('');
+    const [completed, setCompleted] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -16,7 +17,12 @@ const EditTask = () => {
         setTask(data.task);
         setDueDate(data.due_date);
         setCategory(data.category);
+        setCompleted(data.completed);
     };
+
+    const setCompletion = () => {
+        setCompleted(!completed);
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -27,6 +33,7 @@ const EditTask = () => {
             task: task.replace(/\n/g, '<br> <br>'),
             due_date: moment(due_date).utc().format('YYYY-MM-DD HH:mm'),
             category: category,
+            completed: completed
         };
 
         const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -74,6 +81,8 @@ const EditTask = () => {
             setDueDate={setDueDate}
             category={category}
             setCategory={setCategory}
+            completed={completed}
+            setCompleted={setCompletion}
             cancel={`/task/${id}`}
         />
     );

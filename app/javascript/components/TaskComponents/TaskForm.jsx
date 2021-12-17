@@ -55,10 +55,31 @@ const TaskForm = (param) => {
                                 onChange={(e) => param.setCategory(e.target.value)}
                             />
                         </div>
-                        <button type="submit" className="btn custom-button mt-3">
+                        <div className={'form-group ' + (param.edit ? 'visible' : 'invisible')}>
+                            <label className="me-3">Completed: </label>
+                            {param.completed ? (
+                                <input
+                                    checked
+                                    id="flexCheckChecked"
+                                    name="completed"
+                                    type="checkbox"
+                                    className={'form-check-input'}
+                                    onChange={(e) => param.setCompleted(e.target.value)}
+                                />
+                            ) : (
+                                <input
+                                    id="flexCheckChecked"
+                                    name="completed"
+                                    type="checkbox"
+                                    className={'form-check-input'}
+                                    onChange={(e) => param.setCompleted(e.target.value)}
+                                />
+                            )}
+                        </div>
+                        <button type="submit" className="btn custom-button mt-3 me-2">
                             {param.edit ? 'Update Task' : 'Create Task'}
                         </button>
-                        <Link to={param.cancel} className="btn btn-link mt-3">
+                        <Link to={param.cancel} className="btn custom-button mt-3">
                             Cancel
                         </Link>
                     </form>

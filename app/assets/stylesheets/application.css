@@ -14,7 +14,11 @@
     background-color: #293241;
     color: #fff;
     border: none;
-    margin: 0 auto;
+}
+.custom-button.btn:hover {
+    background-color: #293241;
+    color: #fff;
+    border: none;
 }
 .overlay {
     height: 100%;

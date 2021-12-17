@@ -134,10 +134,7 @@ const Tasks = () => {
                                         })
                                         .map((task) => (
                                             <li key={task.id} className="list-group-item">
-                                                <TaskCheckbox
-                                                    task={task}
-                                                    update={updateTasks}
-                                                />
+                                                <TaskCheckbox task={task} update={updateTasks} />
                                             </li>
                                         ))
                                 ) : (
