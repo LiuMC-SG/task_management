@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { List, ListItem, ListItemText, Checkbox, ListItemIcon, Typography } from '@material-ui/core';
 import moment from 'moment';
 
 const TaskCheckbox = (props) => {
-    const [checked, setChecked] = useState(props.completed);
+    const [checked, setChecked] = useState(props.task.completed);
 
-    const onChange = (e) => {
-        console.log(checked);
+    const onClick = () => {
         setChecked(!checked);
-        const url = `/api/v1/tasks/update/${props.id}`;
+        props.update(props.task);
+        const url = `/api/v1/tasks/update/${props.task.id}`;
 
         const body = {
-            name: props.name,
-            task: props.task.replace(/\n/g, '<br> <br>'),
-            due_date: props.due_date,
-            category: props.category,
+            name: props.task.name,
+            task: props.task.task.replace(/\n/g, '<br> <br>'),
+            due_date: props.task.due_date,
+            category: props.task.category,
             completed: !checked ? '1' : '0',
         };
 
@@ -33,27 +34,55 @@ const TaskCheckbox = (props) => {
     };
 
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-sm-1">
-                    <input type="checkbox" onClick={(e) => onChange(e)} defaultChecked={checked} />
-                </div>
-                <div className="col-sm-10">
-                    <div>
-                        <Link to={`/task/${props.id}`}>{props.name}</Link>
-                    </div>
-                    <div>
-                        <p>{props.task}</p>
-                    </div>
-                    <div>
-                        <p>To be completed on: {moment(props.due_date).local().format('YYYY-MM-DD HH:mm')}</p>
-                    </div>
-                </div>
-                <div className="col-sm-1">
-                    <p className="text-truncate">{props.category}</p>
-                </div>
-            </div>
-        </div>
+        <List disablePadding={true}>
+            <ListItem>
+                <ListItemIcon>
+                    <Checkbox checked={checked} onClick={onClick} />
+                </ListItemIcon>
+                <ListItemText
+                    primary={
+                        <Typography component="div">
+                            <Link to={`/task/${props.task.id}`}>
+                                <Typography
+                                    component="p"
+                                    className={'pb-2 text-truncate' + (checked ? ' completed' : '')}
+                                >
+                                    {props.task.name}
+                                </Typography>
+                            </Link>
+                        </Typography>
+                    }
+                    secondary={
+                        <Typography component="div">
+                            <Typography
+                                variant="body1"
+                                component="p"
+                                className={'task_secondary m-0 text-truncate' + (checked ? ' completed' : '')}
+                            >
+                                {props.task.task}
+                            </Typography>
+                            <Typography variant="body2" component="p" className={'task_secondary' + (checked ? ' completed' : '')}>
+                                <Typography component="span" classname="pb-1">{'To be completed on: '}</Typography>
+                                <Typography
+                                    component="span"
+                                    className={
+                                        moment(props.task.due_date).utc().isBefore(moment()) &&
+                                        props.task.completed === false
+                                            ? ' text-danger'
+                                            : ''
+                                    }
+                                >
+                                    {moment(props.task.due_date).local().format('YYYY-MM-DD HH:mm')}
+                                </Typography>
+                            </Typography>
+                            <Typography variant="caption" component="p" className="task_secondary task_category">
+                                {props.task.category}
+                            </Typography>
+                        </Typography>
+                    }
+                />
+            </ListItem>
+        </List>
     );
 };
 

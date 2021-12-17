@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { List, ListItem, ListItemText, ListItemIcon, Collapse } from '@material-ui/core';
-import { Home, Today, DateRange, CalendarToday, Link, Class, ExpandLess, ExpandMore } from '@material-ui/icons';
+import { Home, Today, DateRange, CalendarToday, Link, Class, EventBusy, EventAvailable, ExpandLess, ExpandMore } from '@material-ui/icons';
 
 const TaskSidebar = (props) => {
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
-    const [selectedTimeIndex, setSelectedTimeIndex] = useState(props.timing);
-    const [timeopen, setTimeOpen] = useState(true);
+    const [selectedStateIndex, setSelectedStateIndex] = useState(props.state);
+    const [stateopen, setStateOpen] = useState(true);
     const [categoryopen, setCategoryOpen] = useState(false);
 
-    const handleTimeClick = () => {
-        setTimeOpen(!timeopen);
+    const handleStateClick = () => {
+        setStateOpen(!stateopen);
     };
 
     const handleCategoryClick = () => {
         setCategoryOpen(!categoryopen);
     };
 
-    const onTimeClick = (time, index) => {
-        props.onTimeClick(time);
-        setSelectedTimeIndex(index);
+    const onStateClick = (state, index) => {
+        props.onStateClick(state);
+        setSelectedStateIndex(index);
     };
 
     const onCategoryClick = (category, index) => {
@@ -30,14 +30,14 @@ const TaskSidebar = (props) => {
     return (
         <div>
             <List component="nav">
-                <ListItem onClick={handleTimeClick}>
+                <ListItem onClick={handleStateClick}>
                     <ListItemIcon>
                         <Link />
                     </ListItemIcon>
                     <ListItemText>Links</ListItemText>
-                    {timeopen ? <ExpandLess /> : <ExpandMore />}
+                    {stateopen ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-                <Collapse in={timeopen} timeout="auto" unmountOnExit>
+                <Collapse in={stateopen} timeout="auto" unmountOnExit>
                     <List disablePadding dense>
                         <ListItem
                             button
@@ -55,8 +55,8 @@ const TaskSidebar = (props) => {
                             key="all_time"
                             component={ReactLink}
                             to="/tasks/all_time"
-                            onClick={() => onTimeClick('all_time', 'all_time')}
-                            selected={selectedTimeIndex === 'all_time'}
+                            onClick={() => onStateClick('all_time', 'all_time')}
+                            selected={selectedStateIndex === 'all_time'}
                             className="ps-sm-5"
                         >
                             <ListItemIcon>
@@ -69,8 +69,8 @@ const TaskSidebar = (props) => {
                             key="today"
                             component={ReactLink}
                             to="/tasks/today"
-                            onClick={() => onTimeClick('today', 'today')}
-                            selected={selectedTimeIndex === 'today'}
+                            onClick={() => onStateClick('today', 'today')}
+                            selected={selectedStateIndex === 'today'}
                             className="ps-sm-5"
                         >
                             <ListItemIcon>
@@ -83,14 +83,42 @@ const TaskSidebar = (props) => {
                             key="upcoming"
                             component={ReactLink}
                             to="/tasks/upcoming"
-                            onClick={() => onTimeClick('upcoming', 'upcoming')}
-                            selected={selectedTimeIndex === 'upcoming'}
+                            onClick={() => onStateClick('upcoming', 'upcoming')}
+                            selected={selectedStateIndex === 'upcoming'}
                             className="ps-sm-5"
                         >
                             <ListItemIcon>
                                 <DateRange />
                             </ListItemIcon>
                             <ListItemText>Upcoming</ListItemText>
+                        </ListItem>
+                        <ListItem
+                            button
+                            key="overdue"
+                            component={ReactLink}
+                            to="/tasks/overdue"
+                            onClick={() => onStateClick('overdue', 'overdue')}
+                            selected={selectedStateIndex === 'overdue'}
+                            className="ps-sm-5"
+                        >
+                            <ListItemIcon>
+                                <EventBusy />
+                            </ListItemIcon>
+                            <ListItemText>Overdue</ListItemText>
+                        </ListItem>
+                        <ListItem
+                            button
+                            key="completed"
+                            component={ReactLink}
+                            to="/tasks/completed"
+                            onClick={() => onStateClick('completed', 'completed')}
+                            selected={selectedStateIndex === 'completed'}
+                            className="ps-sm-5"
+                        >
+                            <ListItemIcon>
+                                <EventAvailable />
+                            </ListItemIcon>
+                            <ListItemText>Completed</ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>

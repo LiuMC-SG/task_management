@@ -10,7 +10,7 @@ export default (
     <Router>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/tasks/:day" element={<Tasks />} />
+            <Route path="/tasks/:desc" element={<Tasks />} />
             <Route path="/task/:id" element={<Task />} />
             <Route path="/task/:id/edit" element={<EditTask />} />
             <Route path="/task/new" element={<NewTask />} />

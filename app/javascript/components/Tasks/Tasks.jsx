@@ -10,15 +10,26 @@ const Tasks = () => {
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState('');
     const navigate = useNavigate();
-    const { day } = useParams();
-    const [timing, setTiming] = useState(day);
+    const { desc } = useParams();
+    const [state, setState] = useState(desc);
 
-    const onTimeClick = (time) => {
-        setTiming(time);
+    const onStateClick = (state) => {
+        setState(state);
     };
 
     const onCategoryClick = (d) => {
         setCategory(d);
+    };
+
+    const onSearch = (e) => {
+        setSearch(e.target.value);
+    };
+
+    const updateTasks = (task) => {
+        const temp_tasks = tasks;
+        const task_index = temp_tasks.indexOf(task);
+        temp_tasks[task_index].completed = !temp_tasks[task_index].completed;
+        setTasks(temp_tasks);
     };
 
     useEffect(() => {
@@ -55,29 +66,27 @@ const Tasks = () => {
                 </div>
             </section>
             <div className="container-fluid">
-                <div class="row">
+                <div className="row">
                     <div className="col-sm-3">
                         <main className="container">
                             <TaskSidebar
                                 categories={categories}
-                                timing={timing}
+                                state={state}
                                 onCategoryClick={onCategoryClick}
-                                onTimeClick={onTimeClick}
+                                onStateClick={onStateClick}
                             />
                         </main>
                     </div>
                     <div className="col-sm-9">
                         <main className="container">
-                            <div className="row">
+                            <div className="row pb-3">
                                 <input
                                     type="text"
                                     placeholder="Search Field"
-                                    onChange={(e) => {
-                                        setSearch(e.target.value);
-                                    }}
-                                    className="col-sm-9"
+                                    onChange={(e) => onSearch(e)}
+                                    className="col-sm-10"
                                 />
-                                <div className="col-sm-3">
+                                <div className="col-sm-2">
                                     <Link to="/task/new" className="btn custom-button">
                                         Create New Task
                                     </Link>
@@ -101,31 +110,33 @@ const Tasks = () => {
                                             }
                                         })
                                         .filter((task) => {
-                                            if (timing === 'all_time') {
+                                            if (state === 'all_time') {
                                                 return task;
-                                            } else {
-                                                if (
-                                                    timing === 'today' &&
-                                                    moment(task.due_date).utc().isSame(moment(), 'day')
-                                                ) {
-                                                    return task;
-                                                } else if (
-                                                    timing === 'upcoming' &&
-                                                    moment(task.due_date).utc().isAfter(moment(), 'day')
-                                                ) {
-                                                    return task;
-                                                }
+                                            } else if (
+                                                state === 'today' &&
+                                                moment(task.due_date).utc().isSame(moment(), 'day')
+                                            ) {
+                                                return task;
+                                            } else if (
+                                                state === 'upcoming' &&
+                                                moment(task.due_date).utc().isAfter(moment(), 'day')
+                                            ) {
+                                                return task;
+                                            } else if (
+                                                state === 'overdue' &&
+                                                moment(task.due_date).utc().isBefore(moment()) &&
+                                                task.completed === false
+                                            ) {
+                                                return task;
+                                            } else if (state === 'completed' && task.completed === true) {
+                                                return task;
                                             }
                                         })
-                                        .map((task, index) => (
-                                            <li key={index} className="list-group-item">
+                                        .map((task) => (
+                                            <li key={task.id} className="list-group-item">
                                                 <TaskCheckbox
-                                                    id={task.id}
-                                                    name={task.name}
-                                                    task={task.task}
-                                                    completed={task.completed}
-                                                    due_date={task.due_date}
-                                                    category={task.category}
+                                                    task={task}
+                                                    update={updateTasks}
                                                 />
                                             </li>
                                         ))

@@ -42,7 +42,7 @@ const Task = () => {
                 }
                 throw new Error('Network error.');
             })
-            .then(() => navigate('/tasks'))
+            .then(() => navigate('/tasks/all_time'))
             .catch((error) => console.log(error.message));
     };
 
