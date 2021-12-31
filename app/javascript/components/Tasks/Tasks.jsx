@@ -3,12 +3,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import TaskCheckbox from '../TaskComponents/TaskCheckbox';
 import TaskSidebar from '../TaskComponents/TaskSidebar';
+import TaskDropdown from '../TaskComponents/TaskDropdown';
 
 const Tasks = () => {
     const [tasks, setTasks] = useState([]);
     const [search, setSearch] = useState('');
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState('');
+    const [sort_param, setSort] = useState(-1);
     const navigate = useNavigate();
     const { desc } = useParams();
     const [state, setState] = useState(desc);
@@ -84,9 +86,12 @@ const Tasks = () => {
                                     type="text"
                                     placeholder="Search Field"
                                     onChange={(e) => onSearch(e)}
-                                    className="col-sm-10"
+                                    className="col-sm-8"
                                 />
                                 <div className="col-sm-2">
+                                    <TaskDropdown setSort={setSort} />
+                                </div>
+                                <div className="col-sm-2 d-flex justify-content-center">
                                     <Link to="/task/new" className="btn custom-button">
                                         Create New Task
                                     </Link>
@@ -130,6 +135,25 @@ const Tasks = () => {
                                                 return task;
                                             } else if (state === 'completed' && task.completed === true) {
                                                 return task;
+                                            }
+                                        })
+                                        .sort((a, b) => {
+                                            if (sort_param === 0) {
+                                                return a.name.localeCompare(b.name);
+                                            } else if (sort_param === 1) {
+                                                return -a.name.localeCompare(b.name);
+                                            } else if (sort_param === 2) {
+                                                return a.due_date > b.due_date ? 1 : a.due_date < b.due_date ? -1 : 0;
+                                            } else if (sort_param === 3) {
+                                                return b.due_date > a.due_date ? 1 : b.due_date < a.due_date ? -1 : 0;
+                                            } else if (sort_param === 4 || sort_param < 0) {
+                                                if ((a.completed && b.completed) || (!a.completed && !b.completed)) {
+                                                    return a.name.localeCompare(b.name);
+                                                } else if (a.completed) {
+                                                    return 1;
+                                                } else {
+                                                    return -1;
+                                                }
                                             }
                                         })
                                         .map((task) => (
