@@ -35,7 +35,7 @@ const TaskDropdown = (props) => {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                Filter
+                Sort By
                 <FilterList />
             </Button>
             <Menu
