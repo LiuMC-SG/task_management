@@ -14,12 +14,12 @@ import {
     ExpandMore,
 } from '@material-ui/icons';
 
-interface Props {
+type Props = {
     onStateClick: Function;
     onCategoryClick: Function;
     state: string;
     categories: Array<string>;
-}
+};
 
 const TaskSidebar: React.FC<Props> = (props) => {
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);

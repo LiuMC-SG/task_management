@@ -1,4 +1,4 @@
-import * as  React from 'react';
+import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as moment from 'moment';
 import TaskForm from '../TaskComponents/TaskForm';

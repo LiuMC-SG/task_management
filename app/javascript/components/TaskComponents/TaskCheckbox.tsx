@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Checkbox, ListItemIcon, Typography } from '@material-ui/core';
 import * as moment from 'moment';
 
-interface Props {
-    task: { completed: boolean; id: number; name: string; task: string; due_date: string; category: string};
+type Props = {
+    task: { completed: boolean; id: number; name: string; task: string; due_date: string; category: string };
     update: Function;
-}
+};
 
 const TaskCheckbox: React.FC<Props> = (props) => {
     const [checked, setChecked] = useState(props.task.completed);

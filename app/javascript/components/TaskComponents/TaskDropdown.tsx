@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { FilterList } from '@material-ui/icons';
 
-interface Props {
+type Props = {
     setSort: Function;
-}
+};
 
 const TaskDropdown: React.FC<Props> = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-interface Param {
+type Props = {
     name: string;
     task: string;
     due_date: string;
@@ -15,17 +15,17 @@ interface Param {
     setCompleted: Function;
     edit: boolean;
     cancel: string;
-}
+};
 
-const TaskForm: React.FC<Param> = (param) => {
+const TaskForm: React.FC<Props> = (props) => {
     return (
         <div className="container mt-5">
             <div className="row">
                 <div className="col-sm-12 col-lg-6 offset-lg-3">
-                    <h1 className="font-weight-normal mb-5">{param.edit ? 'Edit task' : 'Add a new task'}</h1>
+                    <h1 className="font-weight-normal mb-5">{props.edit ? 'Edit task' : 'Add a new task'}</h1>
                     <form
                         onSubmit={(e) => {
-                            param.onSubmit(e);
+                            props.onSubmit(e);
                         }}
                     >
                         <div className="form-group">
@@ -33,10 +33,10 @@ const TaskForm: React.FC<Param> = (param) => {
                             <input
                                 name="name"
                                 type="text"
-                                value={param.name}
+                                value={props.name}
                                 className="form-control"
                                 required
-                                onChange={(e) => param.setName(e.target.value)}
+                                onChange={(e) => props.setName(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -44,10 +44,10 @@ const TaskForm: React.FC<Param> = (param) => {
                             <textarea
                                 name="task"
                                 rows={5}
-                                value={param.task}
+                                value={props.task}
                                 className="form-control"
                                 required
-                                onChange={(e) => param.setTask(e.target.value)}
+                                onChange={(e) => props.setTask(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -55,10 +55,10 @@ const TaskForm: React.FC<Param> = (param) => {
                             <input
                                 name="date"
                                 type="datetime-local"
-                                value={param.due_date}
+                                value={props.due_date}
                                 className="form-control"
                                 required
-                                onChange={(e) => param.setDueDate(e.target.value)}
+                                onChange={(e) => props.setDueDate(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -66,21 +66,21 @@ const TaskForm: React.FC<Param> = (param) => {
                             <input
                                 name="category"
                                 type="text"
-                                value={param.category}
+                                value={props.category}
                                 className="form-control"
-                                onChange={(e) => param.setCategory(e.target.value)}
+                                onChange={(e) => props.setCategory(e.target.value)}
                             />
                         </div>
-                        <div className={'form-group ' + (param.edit ? 'visible' : 'invisible')}>
+                        <div className={'form-group ' + (props.edit ? 'visible' : 'invisible')}>
                             <label className="me-3">Completed: </label>
-                            {param.completed ? (
+                            {props.completed ? (
                                 <input
                                     checked
                                     id="flexCheckChecked"
                                     name="completed"
                                     type="checkbox"
                                     className={'form-check-input'}
-                                    onChange={(e) => param.setCompleted(e.target.value)}
+                                    onChange={(e) => props.setCompleted(e.target.value)}
                                 />
                             ) : (
                                 <input
@@ -88,14 +88,14 @@ const TaskForm: React.FC<Param> = (param) => {
                                     name="completed"
                                     type="checkbox"
                                     className={'form-check-input'}
-                                    onChange={(e) => param.setCompleted(e.target.value)}
+                                    onChange={(e) => props.setCompleted(e.target.value)}
                                 />
                             )}
                         </div>
                         <button type="submit" className="btn custom-button mt-3 me-2">
-                            {param.edit ? 'Update Task' : 'Create Task'}
+                            {props.edit ? 'Update Task' : 'Create Task'}
                         </button>
-                        <Link to={param.cancel} className="btn custom-button mt-3">
+                        <Link to={props.cancel} className="btn custom-button mt-3">
                             Cancel
                         </Link>
                     </form>
