@@ -1,7 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-const TaskForm = (param) => {
+interface Param {
+    name: string;
+    task: string;
+    due_date: string;
+    category: string;
+    completed: boolean;
+    onSubmit: Function;
+    setName: Function;
+    setTask: Function;
+    setDueDate: Function;
+    setCategory: Function;
+    setCompleted: Function;
+    edit: boolean;
+    cancel: string;
+}
+
+const TaskForm: React.FC<Param> = (param) => {
     return (
         <div className="container mt-5">
             <div className="row">
@@ -27,7 +43,7 @@ const TaskForm = (param) => {
                             <label>Task Description:</label>
                             <textarea
                                 name="task"
-                                rows="5"
+                                rows={5}
                                 value={param.task}
                                 className="form-control"
                                 required

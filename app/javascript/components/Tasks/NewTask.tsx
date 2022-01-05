@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import TaskForm from '../TaskComponents/TaskForm';
 
-const NewTask = () => {
-    const [name, setName] = useState('');
-    const [task, setTask] = useState('');
-    const [date, setDate] = useState('');
-    const [category, setCategory] = useState('');
+const NewTask: React.FC = () => {
+    const [name, setName] = React.useState('');
+    const [task, setTask] = React.useState('');
+    const [due_date, setDueDate] = React.useState('');
+    const [category, setCategory] = React.useState('');
+    const [completed, setCompleted] = React.useState(false);
     const navigate = useNavigate();
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.MouseEvent) => {
         e.preventDefault();
         const url = '/api/v1/tasks/create';
 
         const body = {
             name: name,
             task: task.replace(/\n/g, '<br> <br>'),
-            due_date: date,
+            due_date: due_date,
             category: category,
         };
 
-        const token = document.querySelector('meta[name="csrf-token"]').content;
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         fetch(url, {
             method: 'POST',
             headers: {
@@ -47,10 +48,12 @@ const NewTask = () => {
             setName={setName}
             task={task}
             setTask={setTask}
-            date={date}
-            setDate={setDate}
+            due_date={due_date}
+            setDueDate={setDueDate}
             category={category}
             setCategory={setCategory}
+            completed={completed}
+            setCompleted={setCompleted}
             cancel={'/tasks/all_time'}
         />
     );

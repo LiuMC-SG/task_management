@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { List, ListItem, ListItemText, ListItemIcon, Collapse, Divider } from '@material-ui/core';
 import {
@@ -14,7 +15,14 @@ import {
     ExpandMore,
 } from '@material-ui/icons';
 
-const TaskSidebar = (props) => {
+interface Props {
+    onStateClick: Function;
+    onCategoryClick: Function;
+    state: string;
+    categories: Array<string>;
+}
+
+const TaskSidebar: React.FC<Props> = (props) => {
     const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
     const [selectedStateIndex, setSelectedStateIndex] = useState(props.state);
     const [stateopen, setStateOpen] = useState(true);

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { FilterList } from '@material-ui/icons';
 
-const TaskDropdown = (props) => {
-    const [anchorEl, setAnchorEl] = useState(null);
+interface Props {
+    setSort: Function;
+}
+
+const TaskDropdown: React.FC<Props> = (props) => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const options = [
         'Ascending by Title',
@@ -13,7 +17,7 @@ const TaskDropdown = (props) => {
         'Completion Status',
     ];
 
-    const handleClick = (e) => {
+    const handleClick = (e: React.MouseEvent) => {
         setAnchorEl(e.currentTarget);
     };
 
@@ -21,7 +25,7 @@ const TaskDropdown = (props) => {
         setAnchorEl(null);
     };
 
-    const onClick = (index) => {
+    const onClick = (index: number) => {
         props.setSort(index);
         handleClose();
     };

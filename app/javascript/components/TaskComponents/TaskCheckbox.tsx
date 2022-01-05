@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Checkbox, ListItemIcon, Typography } from '@material-ui/core';
-import moment from 'moment';
+import * as moment from 'moment';
 
-const TaskCheckbox = (props) => {
+interface Props {
+    task: { completed: boolean; id: number; name: string; task: string; due_date: string; category: string};
+    update: Function;
+}
+
+const TaskCheckbox: React.FC<Props> = (props) => {
     const [checked, setChecked] = useState(props.task.completed);
 
     const onClick = () => {
@@ -19,7 +25,7 @@ const TaskCheckbox = (props) => {
             completed: !checked ? '1' : '0',
         };
 
-        const token = document.querySelector('meta[name="csrf-token"]').content;
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         fetch(url, {
             method: 'PUT',
             headers: {

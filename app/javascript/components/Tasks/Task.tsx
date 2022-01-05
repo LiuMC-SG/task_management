@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import moment from 'moment';
+import * as moment from 'moment';
 
-const Task = () => {
-    const [task, setTask] = useState({ id: '', name: '', task: '', due_date: '', category: '', completed: '' });
+const Task: React.FC = () => {
+    const [task, setTask] = React.useState({ id: '', name: '', task: '', due_date: '', category: '', completed: '' });
     const { id } = useParams();
     const navigate = useNavigate();
 
-    useEffect(() => {
+    React.useEffect(() => {
         const url = `/api/v1/show/${id}`;
 
         fetch(url)
@@ -21,13 +21,13 @@ const Task = () => {
             .catch(() => navigate('/tasks'));
     }, []);
 
-    const addHtmlEntities = (str) => {
+    const addHtmlEntities = (str: string) => {
         return String(str).replace(/&lt;/g, '<').replace(/&gt;/g, '>');
     };
 
-    const deleteTask = (e) => {
+    const deleteTask = (e: React.MouseEvent) => {
         const url = `/api/v1/destroy/${id}`;
-        const token = document.querySelector('meta[name="csrf-token"]').content;
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         fetch(url, {
             method: 'DELETE',

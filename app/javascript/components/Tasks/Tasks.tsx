@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import moment from 'moment';
+import * as moment from 'moment';
 import TaskCheckbox from '../TaskComponents/TaskCheckbox';
 import TaskSidebar from '../TaskComponents/TaskSidebar';
 import TaskDropdown from '../TaskComponents/TaskDropdown';
 
-const Tasks = () => {
-    const [tasks, setTasks] = useState([]);
-    const [search, setSearch] = useState('');
-    const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState('');
-    const [sort_param, setSort] = useState(-1);
+const Tasks: React.FC = () => {
+    const [tasks, setTasks] = React.useState([]);
+    const [search, setSearch] = React.useState('');
+    const [categories, setCategories] = React.useState([]);
+    const [category, setCategory] = React.useState('');
+    const [sort_param, setSort] = React.useState(-1);
     const navigate = useNavigate();
     const { desc } = useParams();
-    const [state, setState] = useState(desc);
+    const [state, setState] = React.useState(desc);
 
     const onStateClick = (state) => {
         setState(state);
@@ -34,7 +34,7 @@ const Tasks = () => {
         setTasks(temp_tasks);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         const url = '/api/v1/tasks/index';
         fetch(url)
             .then((response) => {

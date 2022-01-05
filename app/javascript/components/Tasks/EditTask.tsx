@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import * as  React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import moment from 'moment';
+import * as moment from 'moment';
 import TaskForm from '../TaskComponents/TaskForm';
 
-const EditTask = () => {
-    const [name, setName] = useState('');
-    const [task, setTask] = useState('');
-    const [due_date, setDueDate] = useState('');
-    const [category, setCategory] = useState('');
-    const [completed, setCompleted] = useState(false);
+const EditTask: React.FC = () => {
+    const [name, setName] = React.useState('');
+    const [task, setTask] = React.useState('');
+    const [due_date, setDueDate] = React.useState('');
+    const [category, setCategory] = React.useState('');
+    const [completed, setCompleted] = React.useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -24,7 +24,7 @@ const EditTask = () => {
         setCompleted(!completed);
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.MouseEvent) => {
         e.preventDefault();
         const url = `/api/v1/tasks/update/${id}`;
 
@@ -36,7 +36,7 @@ const EditTask = () => {
             completed: completed,
         };
 
-        const token = document.querySelector('meta[name="csrf-token"]').content;
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -55,7 +55,7 @@ const EditTask = () => {
             .catch((error) => console.log(error.message));
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         const url = `/api/v1/show/${id}`;
 
         fetch(url)
