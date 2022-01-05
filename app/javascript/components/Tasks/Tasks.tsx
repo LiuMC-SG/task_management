@@ -15,11 +15,11 @@ const Tasks: React.FC = () => {
     const { desc } = useParams();
     const [state, setState] = React.useState(desc);
 
-    const onStateClick = (state) => {
+    const onStateClick = (state: string) => {
         setState(state);
     };
 
-    const onCategoryClick = (d) => {
+    const onCategoryClick = (d: string) => {
         setCategory(d);
     };
 

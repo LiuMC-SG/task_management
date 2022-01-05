@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { List, ListItem, ListItemText, ListItemIcon, Collapse, Divider } from '@material-ui/core';
 import {
-    Home,
     Today,
     DateRange,
     CalendarToday,
@@ -36,12 +35,12 @@ const TaskSidebar: React.FC<Props> = (props) => {
         setCategoryOpen(!categoryopen);
     };
 
-    const onStateClick = (state, index) => {
+    const onStateClick = (state: string, index: string) => {
         props.onStateClick(state);
         setSelectedStateIndex(index);
     };
 
-    const onCategoryClick = (category, index) => {
+    const onCategoryClick = (category: string, index: number) => {
         props.onCategoryClick(category);
         setSelectedCategoryIndex(index);
     };
@@ -59,12 +58,6 @@ const TaskSidebar: React.FC<Props> = (props) => {
                     </ListItem>
                     <Collapse in={stateopen} timeout="auto" unmountOnExit>
                         <List disablePadding dense>
-                            <ListItem button key="home" component={ReactLink} to="/" className="ps-sm-5">
-                                <ListItemIcon>
-                                    <Home />
-                                </ListItemIcon>
-                                <ListItemText className="text-truncate">Home</ListItemText>
-                            </ListItem>
                             <ListItem
                                 button
                                 key="all_time"
