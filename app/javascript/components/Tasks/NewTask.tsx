@@ -10,7 +10,7 @@ const NewTask: React.FC = () => {
     const [completed, setCompleted] = React.useState(false);
     const navigate = useNavigate();
 
-    const onSubmit = (e: React.MouseEvent) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const url = '/api/v1/tasks/create';
 
