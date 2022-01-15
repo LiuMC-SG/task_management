@@ -23,7 +23,7 @@ const Tasks: React.FC = () => {
         setCategory(d);
     };
 
-    const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onSearch = (e) => {
         setSearch(e.target.value);
     };
 
@@ -51,8 +51,8 @@ const Tasks: React.FC = () => {
                             .map((task) => {
                                 return task.category.toLowerCase();
                             })
-                            .filter((current_value: string) => current_value)
-                            .filter((current_value: string, index: number, categories: Array<string>) => categories.indexOf(current_value) == index)
+                            .filter((x) => x)
+                            .filter((x, i, a) => a.indexOf(x) == i)
                             .sort(),
                     ),
                 );

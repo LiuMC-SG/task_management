@@ -25,7 +25,7 @@ const Task: React.FC = () => {
         return String(str).replace(/&lt;/g, '<').replace(/&gt;/g, '>');
     };
 
-    const deleteTask = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const deleteTask = (e: React.MouseEvent) => {
         const url = `/api/v1/destroy/${id}`;
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 

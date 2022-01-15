@@ -24,7 +24,7 @@ const EditTask: React.FC = () => {
         setCompleted(!completed);
     };
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = (e: React.MouseEvent) => {
         e.preventDefault();
         const url = `/api/v1/tasks/update/${id}`;
 
