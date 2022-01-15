@@ -13,3 +13,8 @@ Created by Liu Muchen (A0180106U)
 7. (Optional) Run `rake db:seed` to have some sample tasks.
 8. Run `rails s` to start the server
 9. By default, the local server would be started on `http://localhost:3000`
+
+## Sample Website
+
+The following website is setup on Heroku using the above repository
+`https://task-management-cvwo.herokuapp.com/tasks/all_time`
