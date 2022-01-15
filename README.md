@@ -16,5 +16,4 @@ Created by Liu Muchen (A0180106U)
 
 ## Sample Website
 
-The following website is setup on Heroku using the above repository
-`https://task-management-cvwo.herokuapp.com/tasks/all_time`
+The following [website](https://task-management-cvwo.herokuapp.com/tasks/all_time) is setup on Heroku using the above repository.
